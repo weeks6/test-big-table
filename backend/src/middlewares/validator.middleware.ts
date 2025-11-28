@@ -14,6 +14,8 @@ export function validator(schema: z.ZodObject<any, any>) {
 
 			next();
 		} catch (error) {
+			console.log(error);
+
 			if (error instanceof ZodError) {
 				const errorMessages = error.issues.map((issue) => ({
 					message: `${issue.path.join('.')} is ${issue.message}`,

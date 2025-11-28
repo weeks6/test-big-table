@@ -6,11 +6,13 @@ import {
 } from './store.schema.js';
 
 import Store from './store.service.js';
+import z from 'zod';
 
 const router = Router();
 
 router.get('/list', validator(StorePaginationQuerySchema), async (req, res) => {
-	const query = req.query as unknown as StorePaginationQuery;
+	// todo make request replace the actual req.query
+	const query = StorePaginationQuerySchema.parse(req.query);
 
 	res.json(
 		await Store.list({
